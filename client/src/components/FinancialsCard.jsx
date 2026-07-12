@@ -1,30 +1,11 @@
 import React from 'react';
 import { DollarSign, Landmark, Percent, Layers, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { Chart as ChartJS, registerables } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-// Register Chart.js components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+// Register Chart.js components dynamically
+ChartJS.register(...registerables);
 
 function FinancialsCard({ financials }) {
   if (!financials) return null;

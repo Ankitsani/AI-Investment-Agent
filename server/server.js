@@ -41,6 +41,9 @@ if (MONGO_URI) {
 
 // API Routes
 app.use('/api', researchRoutes);
+app.get('/ab', (req,res)=>{
+  res.send("Hello");
+})
 
 // Health check endpoint
 app.get('/health', (req, res) => {

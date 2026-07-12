@@ -12,8 +12,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Enable CORS for frontend requests
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
@@ -41,9 +54,9 @@ if (MONGO_URI) {
 
 // API Routes
 app.use('/api', researchRoutes);
-app.get('/ab', (req,res)=>{
-  res.send("Hello");
-})
+app.get('/', (req, res) => {
+  res.send('🚀 AI Investment Research Server is running!');
+});
 
 // Health check endpoint
 app.get('/health', (req, res) => {

@@ -221,3 +221,5 @@ Below is the transcript summarizing our pair-programming session as we configure
 > Chart.js in production is tree-shaken. Because our financial card draws a mixed chart (bars + lines), Chart.js requires explicit line controller registration when using individual components.
 >
 > *Action Taken: Refactored `FinancialsCard.jsx` to register `registerables` from `chart.js` to prevent any missing controller or scale errors in production.*
+
+My project link=ai-investment-agent-weld.vercel.app  
